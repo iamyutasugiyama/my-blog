@@ -23,12 +23,24 @@ files.forEach(file => {
   const slug = file.replace(".md", "");
 
   const md = fs.readFileSync(`${postsDir}/${file}`, "utf8");
-  const html = markdownToHtml(md);
+
+const lines = md.split("\n");
+
+let date = "";
+let content = md;
+
+if (lines[0].startsWith("date:")) {
+  date = lines[0].replace("date:", "").trim();
+  content = lines.slice(1).join("\n");
+}
+
+const html = markdownToHtml(content);
 
   /* index用カード */
   postsHtml += `
   <div class="post-card">
     <h3><a href="posts/${slug}.html">${slug}</a></h3>
+    <p>${date}</p>
   </div>
   `;
 
@@ -50,6 +62,7 @@ files.forEach(file => {
 </header>
 
 <article>
+<p>${date}</p>
 ${html}
 </article>
 
