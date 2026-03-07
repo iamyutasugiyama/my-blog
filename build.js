@@ -1,70 +1,75 @@
 const fs = require("fs");
-const { marked } = require("marked");
+const path = require("path");
 
-// markdownフォルダの中を読む
-const files = fs.readdirSync("markdown");
+const postsDir = "./posts";
 
-let postList = "";
+/* Markdown → HTML */
+function markdownToHtml(md) {
+  return md
+    .replace(/^# (.*$)/gim, "<h1>$1</h1>")
+    .replace(/^## (.*$)/gim, "<h2>$1</h2>")
+    .replace(/\n/g, "<br>");
+}
 
-// 1つずつ記事を処理
+/* postsフォルダのファイル取得 */
+const files = fs.readdirSync(postsDir);
+
+let postsHtml = "";
+
+/* 記事処理 */
 files.forEach(file => {
+  if (!file.endsWith(".md")) return;
 
-  const markdown = fs.readFileSync(`markdown/${file}`, "utf8");
+  const slug = file.replace(".md", "");
 
-  const lines = markdown.split("\n");
+  const md = fs.readFileSync(`${postsDir}/${file}`, "utf8");
+  const html = markdownToHtml(md);
 
-  const title = lines[0].replace("title: ", "");
-  const date = lines[1].replace("date: ", "");
-  const description = lines[2].replace("description: ", "");
+  /* index用カード */
+  postsHtml += `
+  <div class="post-card">
+    <h3><a href="posts/${slug}.html">${slug}</a></h3>
+  </div>
+  `;
 
-  const htmlContent = marked(markdown);
-
-  const htmlName = file.replace(".md", ".html");
-
-  // 記事ページ
-  const postTemplate = `
+  /* 記事ページ */
+  const postPage = `
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<title>${slug}</title>
 <link rel="stylesheet" href="../css/style.css">
-<title>${title}</title>
 </head>
 
 <body>
 
-<h1>${title}</h1>
-<p>${date}</p>
+<header>
+<h1><a href="../index.html">My Blog</a></h1>
+<button id="dark-toggle">🌙 Dark</button>
+</header>
 
-${htmlContent}
+<article>
+${html}
+</article>
 
-<a href="../index.html">トップへ戻る</a>
+<script src="../js/main.js"></script>
 
 </body>
 </html>
 `;
 
-  fs.writeFileSync(`posts/${htmlName}`, postTemplate);
-
-  // 記事一覧
-  postList += `
-<div class="post-card">
-<h3><a href="posts/${htmlName}">${title}</a></h3>
-<p>${date}</p>
-<p>${description}</p>
-</div>
-`;
-
+  fs.writeFileSync(`posts/${slug}.html`, postPage);
 });
 
-// トップページ
-const indexTemplate = `
+/* indexページ */
+const indexPage = `
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/style.css">
 <title>My Blog</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -74,17 +79,16 @@ const indexTemplate = `
 <button id="dark-toggle">🌙 Dark</button>
 </header>
 
-<h2>記事一覧</h2>
-
 <div class="post-list">
-
-${postList}
-
+${postsHtml}
 </div>
 
-</body>
 <script src="js/main.js"></script>
+
+</body>
 </html>
 `;
 
-fs.writeFileSync("index.html", indexTemplate);
+fs.writeFileSync("index.html", indexPage);
+
+console.log("Blog build complete!");
