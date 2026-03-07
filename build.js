@@ -262,7 +262,7 @@ const indexPage = `
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', 'G-XXXXXXXXXX');
+gtag('config', 'G-91G7701L41');
 </script>
 
 </head>
