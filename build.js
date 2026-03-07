@@ -71,6 +71,7 @@ const indexTemplate = `
 
 <header>
 <h1>My Blog</h1>
+<button id="dark-toggle">🌙 Dark</button>
 </header>
 
 <h2>記事一覧</h2>
@@ -82,6 +83,7 @@ ${postList}
 </div>
 
 </body>
+<script src="js/main.js"></script>
 </html>
 `;
 
