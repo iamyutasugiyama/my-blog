@@ -1,12 +1,7 @@
 date: 2026-03-07
-tags: blog,update
+tags: blog,node
+thumbnail: blog.png
 
 # 2つ目の記事
 
 これは2つ目の記事です。
-
-自作ブログエンジンに記事を追加しました。
-
-## 小見出し
-
-Markdownで簡単に書けます。

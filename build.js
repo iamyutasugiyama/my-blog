@@ -29,6 +29,7 @@ files.forEach(file => {
   let date = "";
   let tags = [];
   let contentStart = 0;
+  let thumbnail = "";
 
   if (lines[0].startsWith("date:")) {
     date = lines[0].replace("date:", "").trim();
@@ -39,6 +40,11 @@ files.forEach(file => {
     tags = lines[1].replace("tags:", "").trim().split(",");
     contentStart = 2;
   }
+
+  if (lines[2] && lines[2].startsWith("thumbnail:")) {
+  thumbnail = lines[2].replace("thumbnail:", "").trim();
+  contentStart = 3;
+}
 
   const content = lines.slice(contentStart).join("\n");
 
@@ -54,10 +60,15 @@ files.forEach(file => {
 
   postsHtml += `
   <div class="post-card" data-title="${slug}">
-    <h3><a href="posts/${slug}.html">${slug}</a></h3>
-    <p>${date}</p>
-    <div>${tagsHtml}</div>
-  </div>
+
+<img class="thumb" src="images/${thumbnail}">
+
+<h3><a href="posts/${slug}.html">${slug}</a></h3>
+<p>${date}</p>
+
+<div>${tagsHtml}</div>
+
+</div>
   `;
 
   /* 記事ページ */
