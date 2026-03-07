@@ -6,6 +6,7 @@ const files = fs.readdirSync(postsDir);
 
 let postsHtml = "";
 let rssItems = "";
+let sitemapUrls = "";
 
 /* Markdown → HTML */
 function markdownToHtml(md) {
@@ -105,6 +106,14 @@ ${html}
 </item>
 `;
 
+  /* sitemap */
+
+  sitemapUrls += `
+<url>
+<loc>https://my-blog-nine-ashen-82.vercel.app/posts/${slug}.html</loc>
+</url>
+`;
+
 });
 
 /* indexページ */
@@ -158,5 +167,23 @@ ${rssItems}
 `;
 
 fs.writeFileSync("rss.xml", rss);
+
+/* sitemap生成 */
+
+sitemapUrls += `
+<url>
+<loc>https://my-blog-nine-ashen-82.vercel.app/</loc>
+</url>
+`;
+
+const sitemap = `
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+${sitemapUrls}
+
+</urlset>
+`;
+
+fs.writeFileSync("sitemap.xml", sitemap);
 
 console.log("Blog build complete!");
