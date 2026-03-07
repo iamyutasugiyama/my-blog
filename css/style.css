@@ -93,6 +93,15 @@ header h1 {
   margin-bottom: 10px;
 }
 
+.tag {
+  display: inline-block;
+  background: #eee;
+  padding: 3px 8px;
+  margin-right: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
 /* ダークモード */
 
 .dark-mode {
@@ -111,4 +120,8 @@ header h1 {
 
 .dark-mode header {
   border-bottom: 2px solid #333;
+}
+
+.dark-mode .tag {
+  background: #333;
 }

@@ -27,22 +27,37 @@ files.forEach(file => {
 const lines = md.split("\n");
 
 let date = "";
-let content = md;
+let tags = [];
+let contentStart = 0;
 
 if (lines[0].startsWith("date:")) {
   date = lines[0].replace("date:", "").trim();
-  content = lines.slice(1).join("\n");
+  contentStart = 1;
 }
+
+if (lines[1] && lines[1].startsWith("tags:")) {
+  tags = lines[1].replace("tags:", "").trim().split(",");
+  contentStart = 2;
+}
+
+const content = lines.slice(contentStart).join("\n");
 
 const html = markdownToHtml(content);
 
+let tagsHtml = "";
+
+tags.forEach(tag => {
+  tagsHtml += `<span class="tag">${tag}</span> `;
+});
+
   /* index用カード */
   postsHtml += `
-  <div class="post-card">
-    <h3><a href="posts/${slug}.html">${slug}</a></h3>
-    <p>${date}</p>
-  </div>
-  `;
+<div class="post-card">
+  <h3><a href="posts/${slug}.html">${slug}</a></h3>
+  <p>${date}</p>
+  <div>${tagsHtml}</div>
+</div>
+`;
 
   /* 記事ページ */
   const postPage = `
@@ -63,6 +78,7 @@ const html = markdownToHtml(content);
 
 <article>
 <p>${date}</p>
+<div>${tagsHtml}</div>
 ${html}
 </article>
 
