@@ -123,6 +123,12 @@ header h1 {
 
 }
 
+.post-nav{
+  display:flex;
+  justify-content:space-between;
+  margin-top:40px;
+}
+
 /* ダークモード */
 
 .dark-mode {
