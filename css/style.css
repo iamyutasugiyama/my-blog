@@ -108,6 +108,13 @@ header h1 {
   margin-bottom: 20px;
   font-size: 16px;
 }
+
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 /* ダークモード */
 
 .dark-mode {
@@ -136,4 +143,26 @@ header h1 {
   background: #222;
   color: white;
   border: 1px solid #444;
+}
+
+/* スマホ対応 */
+
+@media (max-width: 600px) {
+
+  body {
+    padding: 15px;
+  }
+
+  header h1 {
+    font-size: 22px;
+  }
+
+  .post-card {
+    padding: 15px;
+  }
+
+  #search {
+    font-size: 16px;
+  }
+
 }
