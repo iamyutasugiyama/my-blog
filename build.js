@@ -252,14 +252,18 @@ const indexPage = `
 <html>
 
 <head>
-
 <meta charset="UTF-8">
+<title>${title}</title>
+<link rel="stylesheet" href="style.css">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>My Blog</title>
-
-<link rel="stylesheet" href="css/style.css">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XXXXXXXXXX');
+</script>
 
 </head>
 
