@@ -102,6 +102,12 @@ header h1 {
   font-size: 12px;
 }
 
+#search {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
 /* ダークモード */
 
 .dark-mode {
@@ -124,4 +130,10 @@ header h1 {
 
 .dark-mode .tag {
   background: #333;
+}
+
+.dark-mode #search {
+  background: #222;
+  color: white;
+  border: 1px solid #444;
 }

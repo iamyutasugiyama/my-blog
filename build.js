@@ -52,7 +52,7 @@ tags.forEach(tag => {
 
   /* index用カード */
   postsHtml += `
-<div class="post-card">
+<div class="post-card" data-title="${slug}">
   <h3><a href="posts/${slug}.html">${slug}</a></h3>
   <p>${date}</p>
   <div>${tagsHtml}</div>
@@ -107,6 +107,8 @@ const indexPage = `
 <h1>My Blog</h1>
 <button id="dark-toggle">🌙 Dark</button>
 </header>
+
+<input id="search" placeholder="Search posts..." />
 
 <div class="post-list">
 ${postsHtml}
