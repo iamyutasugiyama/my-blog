@@ -3,31 +3,23 @@
 
 <channel>
 
-<title>My Blog</title>
+<title>Furniture Craftsman Journey</title>
 
 <link>https://my-blog-nine-ashen-82.vercel.app</link>
 
-<description>My personal blog</description>
+<description>家具職人を目指す記録</description>
 
 
 <item>
-
 <title>hello</title>
-
 <link>https://my-blog-nine-ashen-82.vercel.app/posts/hello.html</link>
-
 <pubDate>2026-03-07</pubDate>
-
 </item>
 
 <item>
-
 <title>second-post</title>
-
 <link>https://my-blog-nine-ashen-82.vercel.app/posts/second-post.html</link>
-
 <pubDate>2026-03-07</pubDate>
-
 </item>
 
 
