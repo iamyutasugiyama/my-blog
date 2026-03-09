@@ -188,7 +188,16 @@ posts.forEach((post, index) => {
 
   }
 
+  let description = "";
+
+  if (lines[3] && lines[3].startsWith("description:")) {
+    description = lines[3].replace("description:", "").trim();
+    contentStart = 4;
+  }
+
   const postPage = `
+
+  
 <!DOCTYPE html>
 
 <html>
@@ -202,6 +211,12 @@ posts.forEach((post, index) => {
 <title>${slug}</title>
 
 <link rel="stylesheet" href="../css/style.css">
+
+<meta property="og:title" content="${slug}">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://my-blog-nine-ashen-82.vercel.app/posts/${slug}.html">
+<meta property="og:image" content="https://my-blog-nine-ashen-82.vercel.app/images/${thumbnail}">
+<meta property="og:description" content="${slug}">
 
 </head>
 
@@ -252,7 +267,8 @@ const indexPage = `
 <html>
 
 <head>
-<meta charset="UTF-8">
+<meta name="description" content="${description}">
+<meta property="og:description" content="${description}">
 <title>${title}</title>
 <link rel="stylesheet" href="style.css">
 
@@ -271,7 +287,11 @@ gtag('config', 'G-91G7701L41');
 
 <header>
 
-<h1>My Blog</h1>
+<h1>Furniture Craftsman Journey</h1>
+
+<p>
+家具職人を目指す1年間の記録
+</p>
 
 <button id="dark-toggle">🌙 Dark</button>
 
@@ -286,6 +306,14 @@ ${postsHtml}
 </div>
 
 <script src="js/main.js"></script>
+
+<footer>
+
+<p>
+© 2026 Yuta Sugiyama
+</p>
+
+</footer>
 
 </body>
 
