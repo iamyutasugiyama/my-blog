@@ -270,7 +270,7 @@ ${postsHtml}
 
 <footer>
 
-<p>© 2026 Yuta Sugiyama</p>
+<p>© 2026 Taro Yamada</p>
 
 </footer>
 
